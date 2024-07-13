@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class ActivityResponse {
     private Long id;
     private String description;
-    private Boolean concluded;
+    private Boolean isCompleted;
     private LocalDate creationDate;
     private LocalDate conclusionDate;
 }

@@ -29,8 +29,8 @@ public class Activity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "concluded")
-    private Boolean concluded;
+    @Column(name = "completed")
+    private Boolean isCompleted;
 
     @Column(name = "creation_date")
     private LocalDate creationDate;

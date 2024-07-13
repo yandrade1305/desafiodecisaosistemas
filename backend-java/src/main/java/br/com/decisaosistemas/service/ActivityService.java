@@ -23,7 +23,7 @@ public class ActivityService {
     public ActivityResponse create(ActivityRequest activityRequest) {
         Activity activity = Activity.builder()
                 .description(activityRequest.getDescription())
-                .concluded(false)
+                .isCompleted(false)
                 .creationDate(LocalDate.now())
                 .conclusionDate(null)
                 .build();
@@ -33,7 +33,7 @@ public class ActivityService {
         ActivityResponse activityResponse = ActivityResponse.builder()
                 .id(activitySaved.getId())
                 .description(activitySaved.getDescription())
-                .concluded(activitySaved.getConcluded())
+                .isCompleted(activitySaved.getIsCompleted())
                 .creationDate(activitySaved.getCreationDate())
                 .conclusionDate(activitySaved.getConclusionDate())
                 .build();
@@ -52,7 +52,7 @@ public class ActivityService {
         return ActivityResponse.builder()
                 .id(updatedActivity.getId())
                 .description(updatedActivity.getDescription())
-                .concluded(updatedActivity.getConcluded())
+                .isCompleted(updatedActivity.getIsCompleted())
                 .creationDate(updatedActivity.getCreationDate())
                 .conclusionDate(updatedActivity.getConclusionDate())
                 .build();
@@ -65,7 +65,7 @@ public class ActivityService {
                 .map(activity -> ActivityResponse.builder()
                         .id(activity.getId())
                         .description(activity.getDescription())
-                        .concluded(activity.getConcluded())
+                        .isCompleted(activity.getIsCompleted())
                         .creationDate(activity.getCreationDate())
                         .conclusionDate(activity.getConclusionDate())
                         .build())
@@ -77,5 +77,23 @@ public class ActivityService {
                 .orElseThrow(() -> new BadRequestNotFoundException(404, "Atividade não encontrada com o ID: " + id));
 
         activityRepository.delete(activity);
+    }
+
+    public ActivityResponse complete(Long id) {
+        Activity activity = activityRepository.findById(id)
+                .orElseThrow(() -> new BadRequestNotFoundException(404, "Atividade não encontrada com o ID: " + id));
+
+        activity.setIsCompleted(true);
+        activity.setConclusionDate(LocalDate.now());
+
+        Activity completedActivity = activityRepository.save(activity);
+
+        return ActivityResponse.builder()
+                .id(completedActivity.getId())
+                .description(completedActivity.getDescription())
+                .isCompleted(completedActivity.getIsCompleted())
+                .creationDate(completedActivity.getCreationDate())
+                .conclusionDate(completedActivity.getConclusionDate())
+                .build();
     }
 }

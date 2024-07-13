@@ -44,4 +44,8 @@ public class ActivityController {
         return  activityService.listAll();
     }
 
+    @PostMapping("/complete/{id}")
+    public ActivityResponse completeActivity(@PathVariable Long id){
+        return activityService.complete(id);
+    }
 }
