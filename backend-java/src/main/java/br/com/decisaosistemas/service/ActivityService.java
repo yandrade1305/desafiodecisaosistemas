@@ -2,7 +2,6 @@ package br.com.decisaosistemas.service;
 
 import br.com.decisaosistemas.dto.ActivityRequest;
 import br.com.decisaosistemas.dto.ActivityResponse;
-import br.com.decisaosistemas.dto.ActivityUpdateRequest;
 import br.com.decisaosistemas.exception.BadRequestNotFoundException;
 import br.com.decisaosistemas.model.Activity;
 import br.com.decisaosistemas.repository.ActivityRepository;
@@ -42,13 +41,11 @@ public class ActivityService {
         return activityResponse;
     }
 
-    public ActivityResponse update(Long id, ActivityUpdateRequest activityUpdateRequest) {
+    public ActivityResponse update(Long id, ActivityRequest activityRequest) {
         Activity activity = activityRepository.findById(id)
                 .orElseThrow(() -> new BadRequestNotFoundException(404, "Atividade não encontrada com o ID: " + id));
 
-        activity.setDescription(activityUpdateRequest.getDescription());
-        activity.setConcluded(activityUpdateRequest.getConcluded());
-        activity.setConclusionDate(activityUpdateRequest.getConclusionDate());
+        activity.setDescription(activityRequest.getDescription());
 
         Activity updatedActivity = activityRepository.save(activity);
 

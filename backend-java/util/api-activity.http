@@ -11,9 +11,7 @@ PATCH {{server}}/api/activity/update/2
 Content-Type: application/json
 
 {
-  "description": "Fazer backend em TypeScript",
-  "concluded": false,
-  "conclusionDate": "2024-07-15"
+  "description": "Fazer backend em TypeScript"
 }
 
 ### Get All Activities

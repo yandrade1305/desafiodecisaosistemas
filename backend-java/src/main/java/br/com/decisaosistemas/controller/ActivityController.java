@@ -2,7 +2,6 @@ package br.com.decisaosistemas.controller;
 
 import br.com.decisaosistemas.dto.ActivityRequest;
 import br.com.decisaosistemas.dto.ActivityResponse;
-import br.com.decisaosistemas.dto.ActivityUpdateRequest;
 import br.com.decisaosistemas.service.ActivityService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +30,7 @@ public class ActivityController {
     }
 
     @PatchMapping("/update/{id}")
-    public ActivityResponse updateActivity(@PathVariable Long id, @RequestBody ActivityUpdateRequest request){
+    public ActivityResponse updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request){
         return activityService.update(id, request);
     }
 
