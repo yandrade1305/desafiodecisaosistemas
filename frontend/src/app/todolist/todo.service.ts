@@ -19,7 +19,7 @@ interface ActivityRequest {
   providedIn: 'root'
 })
 export class TodoService {
-  private apiUrl = 'http://localhost:8080/api/activity';
+  private apiUrl = 'http://localhost:3000/api/activity';
 
   constructor(private http: HttpClient) { }
 
