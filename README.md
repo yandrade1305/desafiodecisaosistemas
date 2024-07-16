@@ -135,6 +135,54 @@ As funcionalidades foram divididas em: criar, editar, excluir, listar e concluir
     }
   ```
 
+### Listar Atividades Completas
+* Método HTTP
+  * GET
+* API Endpoint
+  * api/activity/get-complete
+  ```json
+  [
+    {
+        "id": 1,
+        "description": "Fazendo Backend em Javascript" ,
+        "isCompleted": true,
+        "creationDate": 2024-07-15,
+        "conclusionDate": 2024-07-16 
+    },
+    {
+        "id": 2,
+        "description": "Fazendo Frontend em Angular" ,
+        "isCompleted": false,
+        "creationDate": 2024-07-15,
+        "conclusionDate": 2024-07-15 
+    }
+  ]
+  ```
+
+  ### Listar Atividades Incompletas
+* Método HTTP
+  * GET
+* API Endpoint
+  * api/activity/get-complete
+  ```json
+  [
+    {
+        "id": 1,
+        "description": "Fazendo Backend em Javascript" ,
+        "isCompleted": true,
+        "creationDate": 2024-07-15,
+        "conclusionDate": null 
+    },
+    {
+        "id": 2,
+        "description": "Fazendo Frontend em Angular" ,
+        "isCompleted": false,
+        "creationDate": 2024-07-14,
+        "conclusionDate": null
+    }
+  ]
+  ```
+
 ### Pessoas Desenvolvedoras
 
 [<p align="center"><img src="https://avatars.githubusercontent.com/u/48693812?s=400&u=e3b46f180b450fc7e0bdc65bbbf68e4a77f8d121&v=4" width=115 ><br><sub>Yan Andrade de Sena</sub>](https://github.com/yandrade1305)</p>
