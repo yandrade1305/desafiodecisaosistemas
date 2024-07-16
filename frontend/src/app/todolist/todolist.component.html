@@ -10,6 +10,38 @@
         <button [disabled]="taskForm.invalid" id="submitButton" type="submit" class="btn btn-primary">Submit</button>
     </form>
     <hr>
+
+    <h2>Incomplete Tasks</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Completed</th>
+                <th scope="col">Creation Date</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Save</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of incompleteActivities; index as i">
+                <td>
+                    <input [ngClass]="{'edit': t.isEditable, 'not-edit': !t.isEditable, 'crossed': t.isCompleted}"
+                        #taskinput type="text" class="form-control" id="taskInTable" value="{{t.description}}"
+                        [readOnly]="!t.isEditable">
+                </td>
+                <td><input (change)="onCheck(t.id!, t.isCompleted!)" id="myCheckbox" type="checkbox" [checked]="t.isCompleted"></td>
+                <td>{{t.creationDate | date:'dd/MM/yyyy'}}</td>
+                <td><button id="delete" class="btn btn-danger btn-sm" (click)="onDelete(t.id!, t.isCompleted!)">Delete</button></td>
+                <td><button id="edit" class="btn btn-primary btn-sm" (click)="onEdit(i, t.isCompleted!)"
+                        [disabled]="t.isEditable">Edit</button></td>
+                <td><button id="save" class="btn btn-warning btn-sm" (click)="onSave(t.id!, taskinput.value, t.isCompleted!)"
+                        [disabled]="!t.isEditable">Save</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Completed Tasks</h2>
     <table class="table">
         <thead>
             <tr>
@@ -23,19 +55,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let t of activityArray; index as i">
+            <tr *ngFor="let t of completedActivities; index as i">
                 <td>
                     <input [ngClass]="{'edit': t.isEditable, 'not-edit': !t.isEditable, 'crossed': t.isCompleted}"
                         #taskinput type="text" class="form-control" id="taskInTable" value="{{t.description}}"
                         [readOnly]="!t.isEditable">
                 </td>
-                <td><input (change)="onCheck(i)" id="myCheckbox" type="checkbox" [checked]="t.isCompleted"></td>
+                <td><input (change)="onCheck(t.id!, t.isCompleted!)" id="myCheckbox" type="checkbox" [checked]="t.isCompleted" disabled></td>
                 <td>{{t.creationDate | date:'dd/MM/yyyy'}}</td>
                 <td>{{t.conclusionDate | date:'dd/MM/yyyy'}}</td>
-                <td><button id="delete" class="btn btn-danger btn-sm" (click)="onDelete(i)">Delete</button></td>
-                <td><button id="edit" class="btn btn-primary btn-sm" (click)="onEdit(i)"
+                <td><button id="delete" class="btn btn-danger btn-sm" (click)="onDelete(t.id!, t.isCompleted!)">Delete</button></td>
+                <td><button id="edit" class="btn btn-primary btn-sm" (click)="onEdit(i, t.isCompleted!)"
                         [disabled]="t.isEditable">Edit</button></td>
-                <td><button id="save" class="btn btn-warning btn-sm" (click)="onSave(i, taskinput.value)"
+                <td><button id="save" class="btn btn-warning btn-sm" (click)="onSave(t.id!, taskinput.value, t.isCompleted!)"
                         [disabled]="!t.isEditable">Save</button></td>
             </tr>
         </tbody>

@@ -19,7 +19,7 @@ interface ActivityRequest {
   providedIn: 'root'
 })
 export class TodoService {
-  private apiUrl = 'http://localhost:3000/api/activity';
+  private apiUrl = 'http://localhost:8080/api/activity';
 
   constructor(private http: HttpClient) { }
 
@@ -43,4 +43,11 @@ export class TodoService {
     return this.http.post<Activity>(`${this.apiUrl}/complete/${id}`, null);
   }  
 
+  listAllComplete(): Observable<Activity[]> {
+    return this.http.get<Activity[]>(`${this.apiUrl}/get-complete`);
+  }
+
+  listAllIncomplete(): Observable<Activity[]> {
+    return this.http.get<Activity[]>(`${this.apiUrl}/get-incomplete`);
+  }
 }

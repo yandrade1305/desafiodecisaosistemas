@@ -96,4 +96,30 @@ public class ActivityService {
                 .conclusionDate(completedActivity.getConclusionDate())
                 .build();
     }
+
+    public List<ActivityResponse> listAllComplete() {
+        List<Activity> activities = activityRepository.findAllByIsCompletedTrueOrderByConclusionDateDesc();
+        return activities.stream()
+                .map(activity -> ActivityResponse.builder()
+                        .id(activity.getId())
+                        .description(activity.getDescription())
+                        .isCompleted(activity.getIsCompleted())
+                        .creationDate(activity.getCreationDate())
+                        .conclusionDate(activity.getConclusionDate())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public List<ActivityResponse> listAllIncomplete() {
+        List<Activity> activities = activityRepository.findAllByIsCompletedFalseOrderByCreationDateDesc();
+        return activities.stream()
+                .map(activity -> ActivityResponse.builder()
+                        .id(activity.getId())
+                        .description(activity.getDescription())
+                        .isCompleted(activity.getIsCompleted())
+                        .creationDate(activity.getCreationDate())
+                        .conclusionDate(activity.getConclusionDate())
+                        .build())
+                .collect(Collectors.toList());
+    }
 }

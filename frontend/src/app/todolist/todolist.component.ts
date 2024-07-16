@@ -21,7 +21,8 @@ interface ActivityRequest {
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent implements OnInit {
-  activityArray: Activity[] = [];
+  completedActivities: Activity[] = [];
+  incompleteActivities: Activity[] = [];
   isSaveButtonDisabled: boolean[] = [];
 
   constructor(private todoService: TodoService) { }
@@ -31,56 +32,73 @@ export class TodolistComponent implements OnInit {
   }
 
   loadTasks() {
-    this.todoService.getActivities().subscribe(activity => {
-      this.activityArray = activity;
-      this.isSaveButtonDisabled = new Array(activity.length).fill(false);
+    this.todoService.listAllComplete().subscribe(activities => {
+      this.completedActivities = activities;
+    });
+    this.todoService.listAllIncomplete().subscribe(activities => {
+      this.incompleteActivities = activities;
     });
   }
+  
 
   onSubmit(form: NgForm) {
     const newActivity: ActivityRequest = {
       description: form.controls['task'].value || ''
     };
     this.todoService.createActivity(newActivity).subscribe(activity => {
-      this.activityArray.push(activity);
-      this.isSaveButtonDisabled.push(false);
+      this.incompleteActivities.push(activity);
       form.reset();
     });
   }
 
-  onDelete(index: number) {
-    const taskId = this.activityArray[index].id;
-    if (taskId) {
-      this.todoService.deleteActivity(taskId).subscribe(() => {
-        this.activityArray.splice(index, 1);
-        this.isSaveButtonDisabled.splice(index, 1);
-      });
+  onDelete(id: number, isCompleted: boolean) {
+    this.todoService.deleteActivity(id).subscribe(() => {
+      if (isCompleted) {
+        this.completedActivities = this.completedActivities.filter(activity => activity.id !== id);
+      } else {
+        this.incompleteActivities = this.incompleteActivities.filter(activity => activity.id !== id);
+      }
+    });
+  }
+
+  onCheck(id: number, isCompleted: boolean) {
+    this.todoService.completeActivity(id).subscribe(updatedActivity => {
+      if (isCompleted) {
+        this.completedActivities = this.completedActivities.filter(activity => activity.id !== id);
+        this.incompleteActivities.push(updatedActivity);
+      } else {
+        this.incompleteActivities = this.incompleteActivities.filter(activity => activity.id !== id);
+        this.completedActivities.push(updatedActivity);
+      }
+    });
+  }
+
+  onEdit(index: number, isCompleted: boolean) {
+    if (isCompleted) {
+      this.completedActivities[index].isEditable = true;
+    } else {
+      this.incompleteActivities[index].isEditable = true;
     }
   }
 
-  onCheck(index: number) {
-    const activity = this.activityArray[index];
-    activity.isCompleted = !activity.isCompleted;
-    if (activity.id) {
-      this.todoService.completeActivity(activity.id).subscribe();
-    }
-  }
-
-  onEdit(index: number) {
-    this.activityArray[index].isEditable = true;
-    this.isSaveButtonDisabled[index] = false;
-  }
-
-  onSave(index: number, newDescription: string) {
-    const activity = this.activityArray[index];
-    if (activity.id) {
-      const updatedActivity: ActivityRequest = {
-        description: newDescription || ''
-      };
-      this.todoService.updateActivity(activity.id, updatedActivity).subscribe(() => {
-        this.activityArray[index].isEditable = false;
-        this.isSaveButtonDisabled[index] = true;
-      });
-    }
+  onSave(id: number, newDescription: string, isCompleted: boolean) {
+    const updatedActivity: ActivityRequest = {
+      description: newDescription || ''
+    };
+    this.todoService.updateActivity(id, updatedActivity).subscribe(() => {
+      if (isCompleted) {
+        const activity = this.completedActivities.find(activity => activity.id === id);
+        if (activity) {
+          activity.description = newDescription;
+          activity.isEditable = false;
+        }
+      } else {
+        const activity = this.incompleteActivities.find(activity => activity.id === id);
+        if (activity) {
+          activity.description = newDescription;
+          activity.isEditable = false;
+        }
+      }
+    });
   }
 }

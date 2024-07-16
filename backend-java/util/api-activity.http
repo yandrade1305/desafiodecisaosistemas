@@ -3,7 +3,7 @@ POST {{server}}/api/activity/create
 Content-Type: application/json
 
 {
-  "description": "Fazendo Backend em Java"
+  "description": "Ana Júlia eu te amo"
 }
 
 ### Create Activity
@@ -23,3 +23,8 @@ DELETE {{server}}/api/activity/delete/9
 ### Mark as completed
 POST {{server}}/api/activity/complete/6
 
+### Get Completed Activities
+GET {{server}}/api/activity/get-complete
+
+### Get INcompleted Activities
+GET {{server}}/api/activity/get-incomplete

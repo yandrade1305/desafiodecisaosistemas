@@ -141,7 +141,7 @@ As funcionalidades foram divididas em: criar, editar, excluir, listar e concluir
 
 ### Conclusão
 
-Quando eu recebi a proposta deste desafio da Decisão Sistemas eu fiquei muito empolgado em poder mostrar toda a minha capacidade em programar em pouco tempo. Acredito que meu grande diferencial foi justamente fazer em um curto tempo (Levei cerca de dois dias para fazer os dois backends e 1 frontend). Eu tive um pouco mais de dificuldade no Angular, já que faz um tempinho que eu não mexo nele (Mas bastou ver uns vídeos de tutoriais no YouTube que consegui desenvolver). 
+Quando eu recebi a proposta deste desafio da Decisão Sistemas eu fiquei muito empolgado em poder mostrar toda a minha capacidade em programar em pouco tempo. Acredito que meu grande diferencial foi justamente fazer em um curto tempo (Levei cerca de dois dias para fazer os dois backends e 2 frontend). Eu tive um pouco mais de dificuldade no Angular, já que faz um tempinho que eu não mexo nele (Mas bastou ver uns vídeos de tutoriais no YouTube que consegui desenvolver). 
 
 Foi divertido e muito interessante fazer esse desafio utilizando NodeJS, a diferença de Node para Java é gritante (Principalmente na quantidade de linhas de código). Fiquei ainda mais interessado em fazer diversos cursos e estudos para me aprofundar nele. 
 

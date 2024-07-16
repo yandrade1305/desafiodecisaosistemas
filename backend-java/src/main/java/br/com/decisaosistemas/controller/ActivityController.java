@@ -48,4 +48,14 @@ public class ActivityController {
     public ActivityResponse completeActivity(@PathVariable Long id){
         return activityService.complete(id);
     }
+
+    @GetMapping("/get-complete")
+    public List<ActivityResponse> listAllCompleteActivities() {
+        return  activityService.listAllComplete();
+    }
+
+    @GetMapping("/get-incomplete")
+    public List<ActivityResponse> listAllIncompleteActivities() {
+        return  activityService.listAllIncomplete();
+    }
 }

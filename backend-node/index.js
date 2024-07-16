@@ -1,33 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Importando o middleware CORS
+const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 const ActivityModel = require('./models/activity');
 
-// Configuração do Sequelize
 const sequelize = new Sequelize('postgres', 'postgres', 'postgres', {
   host: '127.0.0.1',
   dialect: 'postgres'
 });
 
-// Definição do modelo Activity
 const Activity = ActivityModel(sequelize, DataTypes);
 
-// Inicialização do Express
 const app = express();
 app.use(bodyParser.json());
-app.use(cors()); // Utilizando o middleware CORS
+app.use(cors());
 
-// Endpoints
-
-// Create Activity
 app.post('/api/activity/create', async (req, res) => {
   const { description } = req.body;
   const newActivity = await Activity.create({ description, completed: false, creationDate: new Date() });
   res.json(newActivity);
 });
 
-// Update Activity
 app.patch('/api/activity/update/:id', async (req, res) => {
   const { id } = req.params;
   const { description, completed } = req.body;
@@ -55,7 +48,6 @@ app.patch('/api/activity/update/:id', async (req, res) => {
   }
 });
 
-// Delete Activity
 app.delete('/api/activity/delete/:id', async (req, res) => {
   const { id } = req.params;
   const activity = await Activity.findByPk(id);
@@ -67,13 +59,11 @@ app.delete('/api/activity/delete/:id', async (req, res) => {
   }
 });
 
-// List All Activities
 app.get('/api/activity/get', async (req, res) => {
   const activities = await Activity.findAll();
   res.json(activities);
 });
 
-// Complete Activity
 app.post('/api/activity/complete/:id', async (req, res) => {
   const { id } = req.params;
   const activity = await Activity.findByPk(id);
@@ -87,7 +77,32 @@ app.post('/api/activity/complete/:id', async (req, res) => {
   }
 });
 
-// Iniciar o servidor
+app.get('/api/activity/get-complete', async (req, res) => {
+  try {
+    const activities = await Activity.findAll({
+      where: { completed: true },
+      order: [['conclusionDate', 'DESC']]
+    });
+
+    res.json(activities);
+  } catch (error) {
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/api/activity/get-incomplete', async (req, res) => {
+  try {
+    const activities = await Activity.findAll({
+      where: { completed: false },
+      order: [['creationDate', 'DESC']]
+    });
+
+    res.json(activities);
+  } catch (error) {
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
