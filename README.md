@@ -3,7 +3,7 @@
 ![Badge Java](http://img.shields.io/static/v1?label=JAVA&message=17.0.9&color=yellow&style=for-the-badge)
 ![Badge Spring](http://img.shields.io/static/v1?label=SPRING&message=4.0.0&color=GREEN&style=for-the-badge)
 ![Badge PostgreSQL](http://img.shields.io/static/v1?label=POSTGRESQL&message=14.12&color=blue&style=for-the-badge)
-![Badge NodejS](http://img.shields.io/static/v1?label=NODEJS&message=14.12&color=lightgreen&style=for-the-badge)
+![Badge NodejS](http://img.shields.io/static/v1?label=NODEJS&message=22.2.0&color=lightgreen&style=for-the-badge)
 ![Badge Angular](http://img.shields.io/static/v1?label=Angular&message=14.2.10&color=red&style=for-the-badge)
 
 <p align="center">
