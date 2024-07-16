@@ -3,22 +3,22 @@ POST {{server}}/api/activity/create
 Content-Type: application/json
 
 {
-  "description": "Testando"
+  "description": "Fazendo Backend em Java"
 }
 
 ### Create Activity
-PATCH {{server}}/api/activity/update/8
+PATCH {{server}}/api/activity/update/9
 Content-Type: application/json
 
 {
-  "description": "Shaolin Matador de Porco"
+  "description": "Finalizando Frontend"
 }
 
 ### Get All Activities
 GET {{server}}/api/activity/get
 
 ### Delete Activity
-DELETE {{server}}/api/activity/delete/7
+DELETE {{server}}/api/activity/delete/9
 
 ### Mark as completed
 POST {{server}}/api/activity/complete/6
