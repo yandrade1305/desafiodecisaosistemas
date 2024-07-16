@@ -4,7 +4,7 @@
 ![Badge Spring](http://img.shields.io/static/v1?label=SPRING&message=4.0.0&color=GREEN&style=for-the-badge)
 ![Badge PostgreSQL](http://img.shields.io/static/v1?label=POSTGRESQL&message=14.12&color=blue&style=for-the-badge)
 ![Badge NodejS](http://img.shields.io/static/v1?label=NODEJS&message=14.12&color=lightgreen&style=for-the-badge)
-![Badge Angular](http://img.shields.io/static/v1?label=Angular&message=14.2.10&color=RED&style=for-the-badge)
+![Badge Angular](http://img.shields.io/static/v1?label=Angular&message=14.2.10&color=red&style=for-the-badge)
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/e7b7962c-f320-42a7-8b3b-64fa7a1f3c06" />
