@@ -68,8 +68,13 @@ app.post('/api/activity/complete/:id', async (req, res) => {
   const { id } = req.params;
   const activity = await Activity.findByPk(id);
   if (activity) {
-    activity.completed = true;
-    activity.conclusionDate = new Date();
+    if(activity.conclusionDate != null){
+      activity.conclusionDate = null;
+      activity.completed = false;
+    } else {
+      activity.conclusionDate = new Date();
+      activity.completed = true;
+    }
     await activity.save();
     res.json(activity);
   } else {

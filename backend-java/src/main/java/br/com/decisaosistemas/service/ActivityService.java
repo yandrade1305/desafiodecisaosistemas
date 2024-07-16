@@ -33,7 +33,7 @@ public class ActivityService {
         ActivityResponse activityResponse = ActivityResponse.builder()
                 .id(activitySaved.getId())
                 .description(activitySaved.getDescription())
-                .isCompleted(activitySaved.getIsCompleted())
+                .completed(activitySaved.getIsCompleted())
                 .creationDate(activitySaved.getCreationDate())
                 .conclusionDate(activitySaved.getConclusionDate())
                 .build();
@@ -52,7 +52,7 @@ public class ActivityService {
         return ActivityResponse.builder()
                 .id(updatedActivity.getId())
                 .description(updatedActivity.getDescription())
-                .isCompleted(updatedActivity.getIsCompleted())
+                .completed(updatedActivity.getIsCompleted())
                 .creationDate(updatedActivity.getCreationDate())
                 .conclusionDate(updatedActivity.getConclusionDate())
                 .build();
@@ -65,7 +65,7 @@ public class ActivityService {
                 .map(activity -> ActivityResponse.builder()
                         .id(activity.getId())
                         .description(activity.getDescription())
-                        .isCompleted(activity.getIsCompleted())
+                        .completed(activity.getIsCompleted())
                         .creationDate(activity.getCreationDate())
                         .conclusionDate(activity.getConclusionDate())
                         .build())
@@ -83,15 +83,21 @@ public class ActivityService {
         Activity activity = activityRepository.findById(id)
                 .orElseThrow(() -> new BadRequestNotFoundException(404, "Atividade não encontrada com o ID: " + id));
 
-        activity.setIsCompleted(true);
-        activity.setConclusionDate(LocalDate.now());
+
+        if (activity.getConclusionDate() != null){
+            activity.setConclusionDate(null);
+            activity.setIsCompleted(false);
+        } else {
+            activity.setConclusionDate(LocalDate.now());
+            activity.setIsCompleted(true);
+        }
 
         Activity completedActivity = activityRepository.save(activity);
 
         return ActivityResponse.builder()
                 .id(completedActivity.getId())
                 .description(completedActivity.getDescription())
-                .isCompleted(completedActivity.getIsCompleted())
+                .completed(completedActivity.getIsCompleted())
                 .creationDate(completedActivity.getCreationDate())
                 .conclusionDate(completedActivity.getConclusionDate())
                 .build();
@@ -103,7 +109,7 @@ public class ActivityService {
                 .map(activity -> ActivityResponse.builder()
                         .id(activity.getId())
                         .description(activity.getDescription())
-                        .isCompleted(activity.getIsCompleted())
+                        .completed(activity.getIsCompleted())
                         .creationDate(activity.getCreationDate())
                         .conclusionDate(activity.getConclusionDate())
                         .build())
@@ -116,7 +122,7 @@ public class ActivityService {
                 .map(activity -> ActivityResponse.builder()
                         .id(activity.getId())
                         .description(activity.getDescription())
-                        .isCompleted(activity.getIsCompleted())
+                        .completed(activity.getIsCompleted())
                         .creationDate(activity.getCreationDate())
                         .conclusionDate(activity.getConclusionDate())
                         .build())

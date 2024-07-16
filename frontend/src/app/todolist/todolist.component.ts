@@ -5,7 +5,7 @@ import { TodoService } from './todo.service';
 interface Activity {
   id?: number;
   description: string;
-  isCompleted?: boolean;
+  completed?: boolean;
   isEditable?: boolean;
   creationDate?: Date;
   conclusionDate?: Date;
@@ -34,6 +34,7 @@ export class TodolistComponent implements OnInit {
   loadTasks() {
     this.todoService.listAllComplete().subscribe(activities => {
       this.completedActivities = activities;
+      console.log(this.completedActivities)
     });
     this.todoService.listAllIncomplete().subscribe(activities => {
       this.incompleteActivities = activities;
