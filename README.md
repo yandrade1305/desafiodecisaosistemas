@@ -10,8 +10,6 @@
   <img src="https://github.com/user-attachments/assets/e7b7962c-f320-42a7-8b3b-64fa7a1f3c06" />
 </p>
 
-Repositório voltado ao desenvolvimento do <a href="https://github.com/decisaotiago/desafio"> Desafio da empresa Decisão sistemas </a>
-
 ## Índice 
 
 * [Índice](#índice)
@@ -22,6 +20,8 @@ Repositório voltado ao desenvolvimento do <a href="https://github.com/decisaoti
 * [Conclusão](#conclusão)
 
 ## Descrição do Projeto
+
+Repositório voltado ao desenvolvimento do <a href="https://github.com/decisaotiago/desafio"> Desafio da empresa Decisão sistemas </a>
 
 TODO Application é uma aplicação Web onde você consegue gerir tarefas do seu dia-a-dia. A aplicação foi desenvolvida usando dois backends, sendo um em Java e outro em Javascript (Atualmente está sendo utilizado o feito em Javascript). Além disso, o frontend é em Angular.
 
